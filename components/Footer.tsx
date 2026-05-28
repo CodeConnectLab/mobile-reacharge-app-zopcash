@@ -1,115 +1,95 @@
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import { ZopcashLogo } from "./Navbar";
 
-const quickLinks = [
-  { label: "Home", href: "/" },
-  { label: "Features", href: "/#features" },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Download", href: "/#download" },
+const COLUMNS = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Services", href: "/#services" },
+      { label: "Cashback", href: "/#cashback" },
+      { label: "How It Works", href: "/#how" },
+      { label: "Download", href: "/#download" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About Us", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Press", href: "#" },
+      { label: "Contact", href: "#" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Return / Refund Policy", href: "/refund" },
+      { label: "Grievance Policy", href: "/grievance" },
+    ],
+  },
 ];
 
-const legalLinks = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
-  { label: "Return / Refund Policy", href: "/refund" },
-  { label: "Grievance Policy", href: "/grievance" },
+const SOCIALS = [
+  { icon: Twitter, label: "Twitter", href: "#" },
+  { icon: Instagram, label: "Instagram", href: "#" },
+  { icon: Facebook, label: "Facebook", href: "#" },
+  { icon: Linkedin, label: "LinkedIn", href: "#" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-brand-border bg-brand-surface" aria-label="Footer">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-brand-border bg-brand-surface">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:px-12">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-4">
           <div>
-            <p className="font-heading text-xl font-bold gradient-text">Zopcash</p>
-            <p className="mt-2 text-sm text-brand-text-secondary">
-              Pay Direct. Recharge Instant.
+            <ZopcashLogo />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-brand-text-secondary">
+              India&apos;s trusted cashback recharge platform. Pay bills, recharge mobiles, and earn on
+              every transaction.
             </p>
-            <div className="mt-4 flex gap-4">
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="text-brand-text-secondary transition-colors hover:text-brand-accent"
-              >
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                aria-label="Twitter"
-                className="text-brand-text-secondary transition-colors hover:text-brand-accent"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a
-                href="#"
-                aria-label="Instagram"
-                className="text-brand-text-secondary transition-colors hover:text-brand-accent"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
+            <ul className="mt-5 flex items-center gap-2">
+              {SOCIALS.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-brand-border bg-white text-brand-text-secondary transition hover:-translate-y-0.5 hover:border-brand-primary hover:text-brand-primary hover:shadow-card"
+                    aria-label={s.label}
+                  >
+                    <s.icon className="h-4 w-4" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {COLUMNS.map((col) => (
+            <div key={col.heading}>
+              <h4 className="font-heading text-sm font-extrabold uppercase tracking-wider text-brand-text-primary">
+                {col.heading}
+              </h4>
+              <ul className="mt-4 space-y-3">
+                {col.links.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className="text-sm text-brand-text-secondary transition hover:text-brand-primary"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          <div>
-            <h3 className="font-heading mb-4 text-sm font-semibold uppercase tracking-wider text-brand-text-primary">
-              Quick Links
-            </h3>
-            <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-brand-text-secondary transition-colors hover:text-brand-accent"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-heading mb-4 text-sm font-semibold uppercase tracking-wider text-brand-text-primary">
-              Contact Info
-            </h3>
-            <address className="not-italic text-sm text-brand-text-secondary">
-              <p>
-                Sector Number-1, Pithampur, Indorama Industry, District - Dhar, Madhya Pradesh
-              </p>
-              <p className="mt-2">
-                <a
-                  href="tel:+918830747680"
-                  className="transition-colors hover:text-brand-accent"
-                >
-                  +91 883 074 7680
-                </a>
-              </p>
-            </address>
-          </div>
-
-          <div>
-            <h3 className="font-heading mb-4 text-sm font-semibold uppercase tracking-wider text-brand-text-primary">
-              Legal
-            </h3>
-            <ul className="space-y-2">
-              {legalLinks.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-brand-text-secondary transition-colors hover:text-brand-accent"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-brand-border pt-8 sm:flex-row">
-          <p className="text-sm text-brand-text-secondary">
-            © 2025 Zopcash. All Rights Reserved.
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-brand-border pt-6 text-xs text-brand-text-secondary sm:flex-row sm:items-center">
+          <p>© {new Date().getFullYear()} Zopcash. All rights reserved.</p>
+          <p>
+            Made with <span className="text-rose-500">♥</span> in India 🇮🇳
           </p>
-          <p className="text-sm text-brand-text-secondary">Made with ❤️ in India</p>
         </div>
       </div>
     </footer>

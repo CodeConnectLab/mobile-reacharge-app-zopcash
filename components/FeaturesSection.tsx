@@ -2,100 +2,164 @@
 
 import { motion } from "framer-motion";
 import {
-  ArrowRightLeft,
+  BadgeIndianRupee,
+  Clock,
+  Lock,
   ShieldCheck,
-  Zap,
-  Wallet,
-  TrendingUp,
+  Sparkles,
 } from "lucide-react";
-import AppUIShowcase from "./AppUIShowcase";
-import { fadeUp, staggerContainer, getReducedMotionVariants } from "@/lib/motionVariants";
 import { useReducedMotionSafe } from "@/hooks/useReducedMotionSafe";
+import {
+  fadeUp,
+  getReducedMotionVariants,
+  staggerContainer,
+} from "@/lib/motionVariants";
 
-const features = [
+interface Benefit {
+  icon: React.ElementType;
+  title: string;
+  body: string;
+  badge?: string;
+  tone: "purple" | "success" | "cyan" | "gold";
+}
+
+const BENEFITS: Benefit[] = [
   {
-    icon: Zap,
-    title: "Direct Recharge Service",
-    description:
-      "Fast and secure direct recharge solutions for customers with seamless processing.",
+    icon: BadgeIndianRupee,
+    title: "Instant Cashback",
+    body: "Earn assured cashback the moment your recharge or bill payment is successful — no waiting, no minimums.",
+    badge: "Earn ₹50+ avg",
+    tone: "success",
   },
   {
-    icon: Wallet,
-    title: "No Wallet / Balance Storage",
-    description:
-      "We do not maintain customer wallet balances or store funds in our system.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Instant Recharge Processing",
-    description:
-      "Payments are processed instantly and recharges are completed in real time.",
-  },
-  {
-    icon: ArrowRightLeft,
-    title: "Direct Payment → Direct Recharge",
-    description:
-      "Pay directly and get your recharge processed instantly without extra steps.",
+    icon: Clock,
+    title: "Fast Refunds",
+    body: "On the rare occasion something fails, your money is returned within minutes — automatically.",
+    tone: "purple",
   },
   {
     icon: ShieldCheck,
-    title: "Low Failure Rate",
-    description:
-      "Reliable and optimized systems designed to ensure a high success rate with minimal failures.",
+    title: "Lowest Failure Rate",
+    body: "Direct integrations with operators and billers mean recharges land first try, every time.",
+    badge: "99.9%",
+    tone: "cyan",
+  },
+  {
+    icon: Lock,
+    title: "Secure Transactions",
+    body: "Bank-grade 256-bit encryption, PCI-DSS compliant gateways, and zero stored card data.",
+    tone: "purple",
+  },
+  {
+    icon: Sparkles,
+    title: "Hassle-Free Payments",
+    body: "Save your favourites, pay in a tap, and let Zopcash remind you before bills are due.",
+    tone: "gold",
   },
 ];
 
-export default function FeaturesSection() {
+const TONE_BG: Record<Benefit["tone"], string> = {
+  purple: "bg-purple-glow text-white",
+  success: "bg-cashback text-white",
+  cyan: "bg-brand-cyan/90 text-white",
+  gold: "bg-gold-coin text-white",
+};
+
+export default function CashbackBenefits() {
   const { prefersReducedMotion } = useReducedMotionSafe();
-  const containerVariants = getReducedMotionVariants(
-    staggerContainer(0.1),
-    prefersReducedMotion
-  );
-  const itemVariants = getReducedMotionVariants(fadeUp, prefersReducedMotion);
+  const stagger = staggerContainer(0.08);
+  const fade = getReducedMotionVariants(fadeUp, prefersReducedMotion);
 
   return (
-    <section id="features" className="py-20 sm:py-28" aria-label="Features">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section
+      id="cashback"
+      className="relative py-20 md:py-28"
+      aria-labelledby="cashback-heading"
+    >
+      <div className="mx-auto max-w-7xl px-6 md:px-12">
         <motion.div
-          className="mb-16 text-center"
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2 className="font-heading text-3xl font-bold sm:text-4xl">
-            Everything You Need
-          </h2>
-          <p className="mt-4 text-brand-text-secondary">
-            Built for speed, security, and simplicity
-          </p>
-        </motion.div>
-
-        <div className="mb-20">
-          <AppUIShowcase />
-        </div>
-
-        <motion.div
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-6"
-          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="mx-auto max-w-3xl text-center"
         >
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              variants={itemVariants}
-              className={`feature-card relative overflow-hidden p-6 ${
-                index < 3 ? "lg:col-span-2" : "lg:col-span-3"
+          <motion.span variants={fade} className="chip">
+            <BadgeIndianRupee className="h-3.5 w-3.5" /> Cashback Benefits
+          </motion.span>
+          <motion.h2
+            id="cashback-heading"
+            variants={fade}
+            className="font-heading mt-4 text-balance text-3xl font-extrabold tracking-tight text-brand-text-primary sm:text-4xl md:text-5xl"
+          >
+            Get Cashback on <span className="text-gradient-cashback">Every</span> Recharge & Bill Payment
+          </motion.h2>
+          <motion.p
+            variants={fade}
+            className="mt-4 text-balance text-base text-brand-text-secondary md:text-lg"
+          >
+            Whether it&apos;s a mobile recharge, electricity bill, FASTag, or DTH payment — Zopcash
+            rewards every transaction with instant cashback.
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          variants={stagger}
+          className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-6"
+        >
+          {BENEFITS.map((b, i) => (
+            <motion.article
+              key={b.title}
+              variants={fade}
+              className={`benefit-card ${
+                i === 0
+                  ? "lg:col-span-3"
+                  : i === 1
+                    ? "lg:col-span-3"
+                    : "lg:col-span-2"
               }`}
             >
-              <div className="absolute inset-x-0 top-0 h-0.5 bg-card-accent" />
-              <feature.icon className="mb-4 h-8 w-8 text-brand-accent" />
-              <h3 className="font-heading mb-2 text-lg font-semibold">{feature.title}</h3>
-              <p className="text-sm text-brand-text-secondary">{feature.description}</p>
-            </motion.div>
+              <div className="flex items-start justify-between">
+                <span
+                  className={`flex h-12 w-12 items-center justify-center rounded-2xl shadow-cta ${TONE_BG[b.tone]}`}
+                  aria-hidden
+                >
+                  <b.icon className="h-6 w-6" />
+                </span>
+                {b.badge && (
+                  <span className="chip-success">{b.badge}</span>
+                )}
+              </div>
+              <h3 className="font-heading text-xl font-extrabold text-brand-text-primary">
+                {b.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-brand-text-secondary">{b.body}</p>
+            </motion.article>
           ))}
+        </motion.div>
+
+        {/* Total cashback ribbon */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mx-auto mt-12 flex max-w-2xl flex-col items-center justify-between gap-4 rounded-3xl border border-emerald-100 bg-emerald-50/60 px-6 py-5 text-center shadow-card sm:flex-row sm:text-left"
+        >
+          <div className="flex items-center gap-3">
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cashback text-white shadow-cta">
+              <Sparkles className="h-5 w-5" />
+            </span>
+            <p className="text-sm text-brand-text-secondary">
+              Cashback delivered to users so far
+            </p>
+          </div>
+          <p className="font-heading text-2xl font-extrabold text-emerald-700">
+            ₹ 1,28,42,300+
+          </p>
         </motion.div>
       </div>
     </section>
