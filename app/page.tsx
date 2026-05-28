@@ -1,12 +1,14 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import TrustBar from "@/components/TrustBar";
-import HowItWorks from "@/components/HowItWorks";
-import FeaturesSection from "@/components/FeaturesSection";
-import WhyZopcash from "@/components/WhyZopcash";
-import TargetAudience from "@/components/TargetAudience";
+import AppExperience from "@/components/AppUIShowcase";
+import CashbackBenefits from "@/components/FeaturesSection";
+import CashbackTicker from "@/components/CashbackTicker";
 import DownloadCTA from "@/components/DownloadCTA";
 import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
+import HowItWorks from "@/components/HowItWorks";
+import Navbar from "@/components/Navbar";
+import ServicesShowcase from "@/components/ServicesShowcase";
+import Testimonials from "@/components/Testimonials";
+import TrustStats from "@/components/TrustStats";
 
 export default function Home() {
   return (
@@ -14,11 +16,13 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
-        <TrustBar />
+        <CashbackTicker />
+        <CashbackBenefits />
+        <ServicesShowcase />
         <HowItWorks />
-        <FeaturesSection />
-        <WhyZopcash />
-        <TargetAudience />
+        <AppExperience />
+        <TrustStats />
+        <Testimonials />
         <DownloadCTA />
       </main>
       <Footer />
