@@ -106,6 +106,42 @@
   .step-number:hover {
     transform: rotate(360deg);
   }
+
+  .legal-prose {
+    @apply space-y-6 text-brand-text-secondary;
+  }
+
+  .legal-prose h2 {
+    @apply font-heading mt-10 text-xl font-semibold text-brand-text-primary first:mt-0;
+  }
+
+  .legal-prose h3 {
+    @apply font-heading mt-6 text-lg font-medium text-brand-text-primary;
+  }
+
+  .legal-prose p {
+    @apply leading-relaxed;
+  }
+
+  .legal-prose ul {
+    @apply list-disc space-y-2 pl-6;
+  }
+
+  .legal-prose ol {
+    @apply list-decimal space-y-2 pl-6;
+  }
+
+  .legal-prose hr {
+    @apply my-8 border-brand-border;
+  }
+
+  .legal-prose a {
+    @apply text-brand-accent underline-offset-2 transition-colors hover:underline;
+  }
+
+  .legal-prose address {
+    @apply not-italic;
+  }
 }
 
 @layer utilities {
