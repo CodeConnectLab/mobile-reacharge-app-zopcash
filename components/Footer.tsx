@@ -1,15 +1,17 @@
 import { Facebook, Instagram, Twitter } from "lucide-react";
 
 const quickLinks = [
-  { label: "Home", href: "#" },
-  { label: "Features", href: "#features" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Download", href: "#download" },
+  { label: "Home", href: "/" },
+  { label: "Features", href: "/#features" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Download", href: "/#download" },
 ];
 
 const legalLinks = [
-  { label: "Privacy Policy", href: "#" },
-  { label: "Terms & Conditions", href: "#" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Return / Refund Policy", href: "/refund" },
+  { label: "Grievance Policy", href: "/grievance" },
 ];
 
 export default function Footer() {
